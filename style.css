@@ -1,102 +1,85 @@
-/* style.css */
-
-/* 1. Reset and Body Setup */
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
+    background-color: #FADADD;
     margin: 0;
     padding: 0;
-    background-color: #FADADD; /* Light pink */
-    /* Stops scrollbars if a GIF pops at the very edge */
-    overflow: hidden; 
-    width: 100vw;
-    height: 100vh;
-    transition: background-color 0.2s ease; 
-}
-
-/* 2. Main Content Container */
-#container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    height: 100vh;
-    width: 100%;
-    position: relative;
-    /* Keeps buttons and main text above the flying party gifs */
-    z-index: 100; 
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+    transition: background-color 0.5s ease;
 }
 
-/* 3. Main Image Styling */
-#image-container {
+#container {
+    text-align: center;
+    width: 90%;
+    max-width: 800px;
+    background: rgba(255, 255, 255, 0.25);
+    padding: 40px;
+    border-radius: 30px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    z-index: 10;
+}
+
+#question {
+    color: #d63384;
     margin-bottom: 20px;
+    line-height: 1.4;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Default Script Font */
+.script-font {
+    font-family: 'Sacramento', cursive;
+    font-size: 2.8rem;
+}
+
+/* New Arial Font for specific sections */
+.arial-font {
+    font-family: Arial, sans-serif;
+    font-size: 1.4rem; /* Adjusted because Arial is naturally larger than Script */
+    font-weight: bold;
 }
 
 #image-container img {
-    max-width: 80vw; /* Won't exceed 80% of screen width */
-    max-height: 35vh; /* Leaves room for the long final messages */
-    width: auto;
+    max-width: 100%;
     height: auto;
+    width: 320px;
     border-radius: 20px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
 }
 
-/* 4. Text Styling */
-#question {
-    font-family: 'Sacramento', cursive;
-    font-size: 42px; /* Adjusted so "Wait! I got something for you" fits nicely */
-    padding: 0 20px;
-    color: #FB607F;
-    margin: 10px 0;
-    min-height: 80px; /* Prevents the GIF from jumping when text changes */
-    line-height: 1.2;
-}
-
-/* 5. Button Styling */
 #options {
-    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 button {
-    padding: 10px 25px;
-    margin: 10px;
-    font-size: 28px;
     font-family: 'Sacramento', cursive;
-    background-color: #FB607F;
-    color: white;
-    border: none;
-    border-radius: 50px; 
+    font-size: 1.8rem;
+    padding: 12px 40px;
     cursor: pointer;
-    transition: transform 0.2s; 
+    border: none;
+    border-radius: 50px;
+    transition: transform 0.2s;
 }
 
-button:hover {
-    transform: scale(1.1);
-}
+button:hover { transform: scale(1.1); }
+#yes-button { background-color: #ff4d6d; color: white; }
+#no-button { background-color: #ffb3c1; color: white; }
 
-/* 6. The Party Animations */
 .party-icon {
-    position: absolute; 
-    z-index: 50; /* Sits behind the main text/image but above background */
-    pointer-events: none; /* Allows user to click "through" them if needed */
-    animation: celebrate 0.5s ease-out forwards;
-    max-width: 150px;
-    max-height: 150px;
-    object-fit: contain;
+    position: fixed;
+    z-index: 5;
+    pointer-events: none;
 }
 
-/* Animation for the popping effect */
-@keyframes celebrate {
-    0% { 
-        transform: scale(0) rotate(-20deg); 
-        opacity: 0; 
-    }
-    50% { 
-        transform: scale(1.2) rotate(10deg); 
-        opacity: 1; 
-    }
-    100% { 
-        transform: scale(1) rotate(0deg); 
-        opacity: 1; 
-    }
-}
+@media (max-width: 480px) {
+    #container { padding: 20px; background: none; box-shadow: none; }
+    .script-font { font-size: 1.8rem; }
+    .arial-font { font-size: 1.1rem; }}
+
