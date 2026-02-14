@@ -1,3 +1,5 @@
+/* style.css */
+
 body {
     background-color: #FADADD;
     margin: 0;
@@ -20,6 +22,8 @@ body {
     backdrop-filter: blur(8px);
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     z-index: 10;
+    /* This allows the box to fade out smoothly during the party */
+    transition: background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
 }
 
 #question {
@@ -39,7 +43,7 @@ body {
 /* New Arial Font for specific sections */
 .arial-font {
     font-family: Arial, sans-serif;
-    font-size: 1.4rem; /* Adjusted because Arial is naturally larger than Script */
+    font-size: 1.4rem; 
     font-weight: bold;
 }
 
@@ -69,6 +73,7 @@ button {
 }
 
 button:hover { transform: scale(1.1); }
+
 #yes-button { background-color: #ff4d6d; color: white; }
 #no-button { background-color: #ffb3c1; color: white; }
 
@@ -78,8 +83,13 @@ button:hover { transform: scale(1.1); }
     pointer-events: none;
 }
 
+/* RESPONSIVE DESIGN */
 @media (max-width: 480px) {
-    #container { padding: 20px; background: none; box-shadow: none; }
+    #container { 
+        padding: 20px; 
+        /* We use !important here to ensure the JS can still override it if needed */
+        box-shadow: none; 
+    }
     .script-font { font-size: 1.8rem; }
-    .arial-font { font-size: 1.1rem; }}
-
+    .arial-font { font-size: 1.1rem; }
+}

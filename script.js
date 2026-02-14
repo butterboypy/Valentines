@@ -5,6 +5,22 @@ const noTexts = ['No', 'You sure?', 'Pleease?', 'Think again!', 'Last chance!'];
 let noCount = 0;
 let colorInterval, partyInterval;
 
+// Helper to hide the blurry container background
+function hideBox() {
+    const container = document.getElementById('container');
+    container.style.background = "none";
+    container.style.backdropFilter = "none";
+    container.style.boxShadow = "none";
+}
+
+// Helper to show the blurry container background
+function showBox() {
+    const container = document.getElementById('container');
+    container.style.background = "rgba(255, 255, 255, 0.25)";
+    container.style.backdropFilter = "blur(8px)";
+    container.style.boxShadow = "0 10px 30px rgba(0,0,0,0.05)";
+}
+
 function setFont(type) {
     const q = document.getElementById('question');
     if (type === 'arial') {
@@ -24,7 +40,6 @@ function initValentine() {
     optionsElement.style.display = 'none';
     imageContainer.style.display = 'none';
 
-    // 1. Arial for the Long Message
     setFont('arial');
     questionElement.innerText = "TAKE A SCREENSHOT TO READ IT LATER\n\n" +
         "Happy Valentine’s Day ❤️\n\n" +
@@ -34,12 +49,12 @@ function initValentine() {
         "I’m insanely proud to call you mine, and yes, I’m very, very in love with you (˵ •̀ ᴗ - ˵ ) ✧ ❤️";
 
     setTimeout(() => {
-        // 2. Script for the Question
         setFont('script');
         questionElement.innerText = "Will you be my valentine Janhvi?";
         optionsElement.style.display = 'flex';
         imageContainer.style.display = 'block';
         updateImage('maxwell-spin.gif'); 
+        showBox(); 
     }, 5000); 
 }
 
@@ -58,7 +73,7 @@ function selectOption(option) {
         const music = document.getElementById('valentine-music');
         music.play().catch(e => console.log("Audio waiting for user click."));
 
-        // 3. Arial for "Let's go baby"
+        hideBox(); // Remove the blur box for the transition GIFs
         setFont('arial');
         updateImage('zavarius-zavarius-teddy.gif');
         document.getElementById('question').innerText = "Yayyyyyyyyyyyyy!!!!!! Let's go Babyyyy!!!! ❤️";
@@ -70,7 +85,7 @@ function selectOption(option) {
             document.getElementById('question').style.display = 'none';
             document.getElementById('image-container').style.display = 'none';
             startPartySequence();
-        }, 5500);
+        }, 6500);
 
     } else if (option === 'no') {
         noCount++;
@@ -84,6 +99,7 @@ function selectOption(option) {
 }
 
 function startPartySequence() {
+    hideBox(); // Ensure box is hidden during the background-changing party
     triggerPartyEffects();
 
     setTimeout(() => {
@@ -91,15 +107,15 @@ function startPartySequence() {
         clearInterval(partyInterval);
         document.body.style.backgroundColor = '#FADADD'; 
         document.querySelectorAll('.party-icon').forEach(icon => icon.remove());
+        
+        showBox(); // Bring back the blurry box for readable text
         document.getElementById('image-container').style.display = 'block'; 
         document.getElementById('question').style.display = 'block';
 
-        // 4. Script for I Love You
         setFont('script');
         document.getElementById('question').innerText = "I love you Janhvi! ❤️";
         updateImage('love-cute.gif'); 
 
-        // 5. Arial for all subsequent messages
         setTimeout(() => {
             setFont('arial');
             document.getElementById('question').innerText = "Wait!";
@@ -109,7 +125,7 @@ function startPartySequence() {
         setTimeout(() => {
             document.getElementById('question').innerText = "I got something for you (˵ •̀ ᴗ - ˵ ) ✧";
             updateImage('kutya.gif'); 
-        }, 6000);
+        }, 6500);
 
         setTimeout(() => {
             document.getElementById('question').innerText = "It is on your way...";
@@ -129,7 +145,12 @@ function startPartySequence() {
         setTimeout(() => {
             document.getElementById('question').innerText = "Okay Bui-bui Bund Paari, that ass deserves a raise 😁🧚‍♀️";
             updateImage('apple-apple-cat.gif'); 
-            triggerPartyEffects();
+            
+            // Re-trigger party effects ONLY after this text has appeared
+            setTimeout(() => {
+                hideBox(); // Final cleanup for the permanent party
+                triggerPartyEffects();
+            }, 1500); 
         }, 20000);
     }, 15000);
 }
