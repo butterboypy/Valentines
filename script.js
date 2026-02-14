@@ -81,7 +81,7 @@ function startParty() {
         setTimeout(() => {
             document.getElementById('question').innerText = "Wait!";
             updateImage('doggy-cute.gif'); 
-        }, 4000); 
+        }, 2000); 
 
         // 5.5s: "I got something..." (4s + 1.5s)
         setTimeout(() => {
