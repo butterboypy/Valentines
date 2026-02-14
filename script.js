@@ -71,49 +71,49 @@ function startParty() {
         imageContainer.style.display = 'block'; 
         document.getElementById('question').style.display = 'block';
 
-        // --- THE TIMELINE (Cumulative Math) ---
+        // --- THE TIMELINE (Linear/Non-overlapping) ---
 
-        // 0 Seconds: I Love You
+        // 0s: I Love You starts
         document.getElementById('question').innerText = "I love you Janhvi! ❤️";
         updateImage('love-cute.gif'); 
 
-        // 4 Seconds: Wait!
+        // 4s: "Wait!" appears
         setTimeout(() => {
             document.getElementById('question').innerText = "Wait!";
             updateImage('doggy-cute.gif'); 
         }, 4000); 
 
-        // 5.5 Seconds: I got something... (Wait! lasted 1.5s)
+        // 5.5s: "I got something..." (4s + 1.5s)
         setTimeout(() => {
             document.getElementById('question').innerText = "I got something for you (˵ •̀ ᴗ - ˵ ) ✧";
             updateImage('kutya.gif'); 
         }, 5500);
 
-        // 8 Seconds: It is on your way... (I got something lasted 2.5s)
+        // 8.5s: "It is on your way..." (5.5s + 3s)
         setTimeout(() => {
             document.getElementById('question').innerText = "It is on your way...";
             updateImage('presents-gifts.gif'); 
-        }, 8000);
+        }, 8500);
 
-        // 10.5 Seconds: Wait patiently (On your way lasted 2.5s)
+        // 11.5s: "Wait patiently" (8.5s + 3s)
         setTimeout(() => {
             document.getElementById('question').innerText = "Wait patiently hehe 🎁";
             updateImage('cute-cat.gif'); 
-        }, 10500);
+        }, 11500);
 
-        // 13 Seconds: You are the best (Wait patiently lasted 2.5s)
+        // 15s: "You are the best" (11.5s + 3.5s)
         setTimeout(() => {
             document.getElementById('question').innerText = "u r the best baby. Mwaahhh !!! ❤️✨";
             updateImage('cat-cat-meme.gif'); 
-        }, 13000);
+        }, 15000);
 
-        // 17 Seconds: Final Message (The best baby lasted 4s)
+        // 19s: Final Message (15s + 4s)
         setTimeout(() => {
             document.getElementById('question').innerText = "Okay Bui-bui Bund Paari, that ass deserves a raise 😁🧚‍♀️";
             updateImage('apple-apple-cat.gif'); 
-        }, 17000);
+        }, 19000);
 
-    }, 15000);
+    }, 15000); // 15 seconds of chaos before the sentimental ending
 }
 
 function createFloatingGif() {
@@ -124,7 +124,6 @@ function createFloatingGif() {
     const size = Math.random() * 100 + 100; 
     img.style.width = size + "px";
 
-    // Stay within safe screen boundaries (5% to 85%)
     const randomLeft = Math.floor(Math.random() * 80) + 5; 
     const randomTop = Math.floor(Math.random() * 80) + 5;  
     
@@ -140,12 +139,18 @@ function createFloatingGif() {
     }, 3000);
 }
 
+// CRITICAL FIX: The function that clears the container before adding a new image
 function updateImage(imageSrc) {
     const imageContainer = document.getElementById('image-container');
+    
+    // Clear the container completely to prevent overlapping/double images
     imageContainer.innerHTML = ''; 
+    
     const img = new Image();
     img.src = imageSrc;
     img.alt = 'Valentine GIF';
+    
+    // Wait for the image to load before showing it to avoid blank flashes
     img.onload = function() {
         imageContainer.appendChild(img);
     };
