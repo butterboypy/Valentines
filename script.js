@@ -87,18 +87,22 @@
 // 1. Define your series of GIFs here
 const noGifs = ['maxwell-spin.gif', 'cat.gif', 'oia-uia.gif', 'oia-uia.gif']; 
 const yesGifs = ['maxwell-spin.gif', 'cat-heart.gif', 'oia-uia.gif']; 
-const partyGifs = ['maxwell-spin.gif', 'cat-heart.gif', 'oia-uia.gif']; // GIFs for the big celebration
+const partyGifs = ['maxwell-spin.gif', 'cat-heart.gif', 'oia-uia.gif']; 
 const noTexts = ['No', 'You sure?', 'Pleease?', 'Think again!', 'Last chance!'];
 
 let noCount = 0;
 
 function selectOption(option) {
     if (option === 'yes') {
-        // 1. Show the "Yay" text first
+        // --- THIS PART IS UPDATED ---
+        // 1. Change the image to a specific "Happy" GIF for the "Yay" text part
+        updateImage('cat-heart.gif'); // You can change 'cat-heart.gif' to any GIF you want here
+        
+        // 2. Show the "Yay" text
         document.getElementById('question').innerText = "Yayyyyyyyyyyyyy!!!!!! Let's go Babyyyy!!!! ❤️";
         document.getElementById('options').style.display = 'none'; // Hide buttons immediately
         
-        // 2. Wait 1 second, then start the party explosion
+        // 3. Wait 1 second, then start the party explosion
         setTimeout(function() {
             document.getElementById('question').style.display = 'none'; // Hide text
             document.getElementById('image-container').style.display = 'none'; // Hide main image
@@ -107,18 +111,14 @@ function selectOption(option) {
 
     } else if (option === 'no') {
         noCount++;
-        
-        // Update "No" button text based on count
         const noButton = document.getElementById('no-button');
         noButton.innerText = noTexts[noCount % noTexts.length];
 
-        // Increase "Yes" button size
         const yesButton = document.getElementById('yes-button');
         const currentFontSize = window.getComputedStyle(yesButton).getPropertyValue('font-size');
         const newSize = parseFloat(currentFontSize) * 1.5; 
         yesButton.style.fontSize = newSize + 'px';
 
-        // Cycle through the "No" GIFs
         updateImage(noGifs[noCount % noGifs.length]);
     }
 }
@@ -127,33 +127,27 @@ function startParty() {
     const colors = ['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#0000ff', '#4b0082', '#9400d3'];
     let colorIndex = 0;
 
-    // 1. INSTANT BURST: Create 20 GIFs immediately to fill the screen
     for (let i = 0; i < 20; i++) {
         createFloatingGif();
     }
 
-    // 2. Background color cycle (Rainbow effect)
     const colorInterval = setInterval(() => {
         document.body.style.backgroundColor = colors[colorIndex];
         colorIndex = (colorIndex + 1) % colors.length;
     }, 200);
 
-    // 3. Continuous Party: Add new GIFs rapidly (every 150ms)
     const partyInterval = setInterval(() => {
         createFloatingGif();
     }, 150); 
 
-    // 4. STOP the party after 10 seconds
     setTimeout(() => {
         clearInterval(colorInterval);
         clearInterval(partyInterval);
-        document.body.style.backgroundColor = '#FADADD'; // Reset to light pink
+        document.body.style.backgroundColor = '#FADADD'; 
         
-        // Remove all party icons from the screen
         const icons = document.querySelectorAll('.party-icon');
         icons.forEach(icon => icon.remove());
 
-        // Bring back a final message
         document.getElementById('question').style.display = 'block';
         document.getElementById('question').innerText = "I love you Janhvi! ❤️";
     }, 10000);
@@ -164,17 +158,14 @@ function createFloatingGif() {
     img.src = partyGifs[Math.floor(Math.random() * partyGifs.length)];
     img.className = 'party-icon';
     
-    // Random position across the entire viewport
     img.style.left = Math.random() * 90 + "vw"; 
     img.style.top = Math.random() * 90 + "vh";
     
-    // Random size between 100px and 250px
     const size = Math.random() * 150 + 100; 
     img.style.width = size + "px";
 
     document.body.appendChild(img);
 
-    // Individual GIFs disappear after 3 seconds to keep the screen from getting too crowded
     setTimeout(() => { 
         if(img.parentNode) {
             img.remove(); 
@@ -184,7 +175,7 @@ function createFloatingGif() {
 
 function updateImage(imageSrc) {
     const imageContainer = document.getElementById('image-container');
-    imageContainer.innerHTML = ''; // Clear old image
+    imageContainer.innerHTML = ''; 
     const img = new Image();
     img.src = imageSrc;
     img.alt = 'Cat GIF';
@@ -193,5 +184,5 @@ function updateImage(imageSrc) {
     };
 }
 
-// Initial image load
+// Initial image load - This keeps your "Will you be my valentine" GIF as Maxwell
 updateImage('maxwell-spin.gif');
