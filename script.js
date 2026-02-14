@@ -207,7 +207,7 @@ function startPartySequence() {
 
                 // 3. START PARTY FOREVER ON A CLEAN SCREEN
                 triggerPartyEffects();
-            }, 3000); 
+            }, 4500); 
         }, 20000);
     }, 15000);
 }
