@@ -186,10 +186,10 @@ function startPartySequence() {
 
         // Subsequent messages...
         setTimeout(() => { setFont('arial'); document.getElementById('question').innerText = "Wait!"; updateImage('doggy-cute.gif'); }, 3000); 
-        setTimeout(() => { document.getElementById('question').innerText = "I got something for you (˵ •̀ ᴗ - ˵ ) ✧"; updateImage('kutya.gif'); }, 6000);
-        setTimeout(() => { document.getElementById('question').innerText = "It is on your way..."; updateImage('presents-gifts.gif'); }, 10000);
-        setTimeout(() => { document.getElementById('question').innerText = "Wait patiently hehe 🎁"; updateImage('cute-cat.gif'); }, 13000);
-        setTimeout(() => { document.getElementById('question').innerText = "u r the best baby. Mwaahhh !!! ❤️✨"; updateImage('cat-cat-meme.gif'); }, 16000);
+        setTimeout(() => { document.getElementById('question').innerText = "I got something for you (˵ •̀ ᴗ - ˵ ) ✧"; updateImage('kutya.gif'); }, 6500);
+        setTimeout(() => { document.getElementById('question').innerText = "It is on your way..."; updateImage('presents-gifts.gif'); }, 12000);
+        setTimeout(() => { document.getElementById('question').innerText = "Wait patiently hehe 🎁"; updateImage('cute-cat.gif'); }, 15000);
+        setTimeout(() => { document.getElementById('question').innerText = "u r the best baby. Mwaahhh !!! ❤️✨"; updateImage('cat-cat-meme.gif'); }, 18000);
 
         // --- THE FINAL PART FIX ---
         setTimeout(() => {
