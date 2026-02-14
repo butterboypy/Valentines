@@ -1,6 +1,5 @@
 // 1. Define your series of GIFs here
 const noGifs = ['glorp-spin.gif','maxwell-spin.gif', 'oia-uia.gif', 'hit-bubu.webp','hasbulla-hasbik.gif','gorilla-beating-chest.gif']; 
-const yesGifs = ['maxwell-spin.gif', 'cat-heart.gif', 'oia-uia.gif']; 
 const partyGifs = ['maxwell-spin.gif', 'cat-heart.gif', 'oia-uia.gif', 'alien-cat-gleepy.gif','mochi-peachcat-cute-cat.gif','cute-happy.gif','happy-dance-happy (1).gif','pengu-pudgy.gif']; 
 const noTexts = ['No', 'You sure?', 'Pleease?', 'Think again!', 'Last chance!'];
 
@@ -8,6 +7,10 @@ let noCount = 0;
 
 function selectOption(option) {
     if (option === 'yes') {
+        // --- START AUDIO ---
+        const music = document.getElementById('valentine-music');
+        music.play().catch(e => console.log("Playback blocked until user interaction."));
+
         // 1. Show the first transition GIF immediately
         updateImage('zavarius-zavarius-teddy.gif');
         
@@ -58,7 +61,6 @@ function startParty() {
         createFloatingGif();
     }, 150); 
 
-    // THE FINAL SEQUENCE (Starts after 15 seconds of party)
     setTimeout(() => {
         clearInterval(colorInterval);
         clearInterval(partyInterval);
@@ -71,90 +73,66 @@ function startParty() {
         imageContainer.style.display = 'block'; 
         document.getElementById('question').style.display = 'block';
 
-        // --- THE TIMELINE (Linear/Non-overlapping) ---
-
-        // 0s: I Love You starts
+        // --- THE TIMELINE ---
         document.getElementById('question').innerText = "I love you Janhvi! ❤️";
         updateImage('love-cute.gif'); 
 
-        // 4s: "Wait!" appears
         setTimeout(() => {
             document.getElementById('question').innerText = "Wait!";
             updateImage('doggy-cute.gif'); 
-        }, 2000); 
+        }, 4000); 
 
-        // 5.5s: "I got something..." (4s + 1.5s)
         setTimeout(() => {
             document.getElementById('question').innerText = "I got something for you (˵ •̀ ᴗ - ˵ ) ✧";
             updateImage('kutya.gif'); 
         }, 5500);
 
-        // 8.5s: "It is on your way..." (5.5s + 3s)
         setTimeout(() => {
             document.getElementById('question').innerText = "It is on your way...";
             updateImage('presents-gifts.gif'); 
         }, 8500);
 
-        // 11.5s: "Wait patiently" (8.5s + 3s)
         setTimeout(() => {
             document.getElementById('question').innerText = "Wait patiently hehe 🎁";
             updateImage('cute-cat.gif'); 
         }, 11500);
 
-        // 15s: "You are the best" (11.5s + 3.5s)
         setTimeout(() => {
             document.getElementById('question').innerText = "u r the best baby. Mwaahhh !!! ❤️✨";
             updateImage('cat-cat-meme.gif'); 
         }, 15000);
 
-        // 19s: Final Message (15s + 4s)
         setTimeout(() => {
             document.getElementById('question').innerText = "Okay Bui-bui Bund Paari, that ass deserves a raise 😁🧚‍♀️";
             updateImage('apple-apple-cat.gif'); 
         }, 19000);
 
-    }, 15000); // 15 seconds of chaos before the sentimental ending
+    }, 15000);
 }
 
 function createFloatingGif() {
     const img = new Image();
     img.src = partyGifs[Math.floor(Math.random() * partyGifs.length)];
     img.className = 'party-icon';
-    
     const size = Math.random() * 100 + 100; 
     img.style.width = size + "px";
-
     const randomLeft = Math.floor(Math.random() * 80) + 5; 
     const randomTop = Math.floor(Math.random() * 80) + 5;  
-    
     img.style.left = randomLeft + "vw"; 
     img.style.top = randomTop + "vh";
-
     document.body.appendChild(img);
-
-    setTimeout(() => { 
-        if(img.parentNode) {
-            img.remove(); 
-        }
-    }, 3000);
+    setTimeout(() => { if(img.parentNode) img.remove(); }, 3000);
 }
 
-// CRITICAL FIX: The function that clears the container before adding a new image
 function updateImage(imageSrc) {
     const imageContainer = document.getElementById('image-container');
-    
-    // Clear the container completely to prevent overlapping/double images
     imageContainer.innerHTML = ''; 
-    
     const img = new Image();
     img.src = imageSrc;
     img.alt = 'Valentine GIF';
-    
-    // Wait for the image to load before showing it to avoid blank flashes
     img.onload = function() {
         imageContainer.appendChild(img);
     };
 }
 
-// Initial image load
 updateImage('maxwell-spin.gif');
