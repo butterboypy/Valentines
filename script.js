@@ -5,25 +5,46 @@ const noTexts = ['No', 'You sure?', 'Pleease?', 'Think again!', 'Last chance!'];
 
 let noCount = 0;
 
+// --- INITIAL MESSAGE LOGIC ---
+function initValentine() {
+    const questionElement = document.getElementById('question');
+    const optionsElement = document.getElementById('options');
+    const imageContainer = document.getElementById('image-container');
+
+    // Hide things initially for the long message
+    optionsElement.style.display = 'none';
+    imageContainer.style.display = 'none';
+
+    // Set the long message
+    questionElement.innerText = "TAKE A SCREENSHOT TO READ IT LATER\n\n" +
+        "Happy Valentine’s Day ❤️\n\n" +
+        "Two years with you and I’m still wondering how you manage to be this cute, this smart, and this dangerously amazing all at once. " +
+        "You don’t just steal my heart—you run it like a pro 😏\n" +
+        "You’re confident, beautiful, and way too awesome to be real… and somehow you chose me. " +
+        "I’m insanely proud to call you mine, and yes, I’m very, very in love with you (˵ •̀ ᴗ - ˵ ) ✧ ❤️";
+
+    // Wait 5 seconds, then show the Valentine Question
+    setTimeout(() => {
+        questionElement.innerText = "Will you be my valentine Janhvi?";
+        optionsElement.style.display = 'block';
+        imageContainer.style.display = 'block';
+        updateImage('maxwell-spin.gif');
+    }, 5000); 
+}
+
 function selectOption(option) {
     if (option === 'yes') {
-        // --- START AUDIO ---
         const music = document.getElementById('valentine-music');
         music.play().catch(e => console.log("Playback blocked until user interaction."));
 
-        // 1. Show the first transition GIF immediately
         updateImage('zavarius-zavarius-teddy.gif');
-        
-        // 2. Update text and hide buttons
         document.getElementById('question').innerText = "Yayyyyyyyyyyyyy!!!!!! Let's go Babyyyy!!!! ❤️";
         document.getElementById('options').style.display = 'none';
 
-        // 3. Swap to the second transition GIF after 1.5 seconds
         setTimeout(function() {
             updateImage('cheering-baby-yeah.gif');
         }, 1500);
 
-        // 4. Start the full party explosion after 4 seconds total
         setTimeout(function() {
             document.getElementById('question').style.display = 'none';
             document.getElementById('image-container').style.display = 'none';
@@ -73,14 +94,14 @@ function startParty() {
         imageContainer.style.display = 'block'; 
         document.getElementById('question').style.display = 'block';
 
-        // --- THE TIMELINE ---
+        // --- THE FINAL TIMELINE ---
         document.getElementById('question').innerText = "I love you Janhvi! ❤️";
         updateImage('love-cute.gif'); 
 
         setTimeout(() => {
             document.getElementById('question').innerText = "Wait!";
             updateImage('doggy-cute.gif'); 
-        }, 4000); 
+        }, 2000); 
 
         setTimeout(() => {
             document.getElementById('question').innerText = "I got something for you (˵ •̀ ᴗ - ˵ ) ✧";
@@ -135,4 +156,5 @@ function updateImage(imageSrc) {
     };
 }
 
-updateImage('maxwell-spin.gif');
+// START THE FLOW
+initValentine();
