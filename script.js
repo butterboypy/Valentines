@@ -98,6 +98,74 @@ function selectOption(option) {
     }
 }
 
+// function startPartySequence() {
+//     hideBox(); 
+//     triggerPartyEffects();
+
+//     setTimeout(() => {
+//         clearInterval(colorInterval);
+//         clearInterval(partyInterval);
+//         document.body.style.backgroundColor = '#FADADD'; 
+//         document.querySelectorAll('.party-icon').forEach(icon => icon.remove());
+        
+//         showBox(); 
+//         document.getElementById('image-container').style.display = 'block'; 
+//         document.getElementById('question').style.display = 'block';
+
+//         setFont('script');
+//         document.getElementById('question').innerText = "I love you Janhvi! ❤️";
+//         updateImage('love-cute.gif'); 
+
+//         setTimeout(() => {
+//             setFont('arial');
+//             document.getElementById('question').innerText = "Wait!";
+//             updateImage('doggy-cute.gif'); 
+//         }, 3000); 
+
+//         setTimeout(() => {
+//             document.getElementById('question').innerText = "I got something for you (˵ •̀ ᴗ - ˵ ) ✧";
+//             updateImage('kutya.gif'); 
+//         }, 6000);
+
+//         setTimeout(() => {
+//             document.getElementById('question').innerText = "It is on your way...";
+//             updateImage('presents-gifts.gif'); 
+//         }, 10000);
+
+//         setTimeout(() => {
+//             document.getElementById('question').innerText = "Wait patiently hehe 🎁";
+//             updateImage('cute-cat.gif'); 
+//         }, 13000);
+
+//         setTimeout(() => {
+//             document.getElementById('question').innerText = "u r the best baby. Mwaahhh !!! ❤️✨";
+//             updateImage('cat-cat-meme.gif'); 
+//         }, 16000);
+
+//         // --- FINAL TIMING FIX ---
+//         setTimeout(() => {
+//             document.getElementById('question').innerText = "Okay Bui-bui Bund Paari, that ass deserves a raise 😁🧚‍♀️";
+//             updateImage('apple-apple-cat.gif'); 
+            
+//             // Wait 3 seconds so she can read the joke and see the cat
+//             setTimeout(() => {
+//                 // 1. Hide the text and the apple cat image so the screen is clean
+//                 document.getElementById('question').style.display = 'none';
+//                 document.getElementById('image-container').style.display = 'none';
+                
+//                 // 2. Hide the blurry box
+//                 hideBox(); 
+
+//                 // 3. Start the permanent party on a clean screen
+//                 triggerPartyEffects();
+//             }, 3000); 
+//         }, 20000);
+//     }, 15000);
+// }
+
+
+// ... [Keep all your top variables and init functions the same] ...
+
 function startPartySequence() {
     hideBox(); 
     triggerPartyEffects();
@@ -116,52 +184,35 @@ function startPartySequence() {
         document.getElementById('question').innerText = "I love you Janhvi! ❤️";
         updateImage('love-cute.gif'); 
 
-        setTimeout(() => {
-            setFont('arial');
-            document.getElementById('question').innerText = "Wait!";
-            updateImage('doggy-cute.gif'); 
-        }, 3000); 
+        // Subsequent messages...
+        setTimeout(() => { setFont('arial'); document.getElementById('question').innerText = "Wait!"; updateImage('doggy-cute.gif'); }, 3000); 
+        setTimeout(() => { document.getElementById('question').innerText = "I got something for you (˵ •̀ ᴗ - ˵ ) ✧"; updateImage('kutya.gif'); }, 6000);
+        setTimeout(() => { document.getElementById('question').innerText = "It is on your way..."; updateImage('presents-gifts.gif'); }, 10000);
+        setTimeout(() => { document.getElementById('question').innerText = "Wait patiently hehe 🎁"; updateImage('cute-cat.gif'); }, 13000);
+        setTimeout(() => { document.getElementById('question').innerText = "u r the best baby. Mwaahhh !!! ❤️✨"; updateImage('cat-cat-meme.gif'); }, 16000);
 
-        setTimeout(() => {
-            document.getElementById('question').innerText = "I got something for you (˵ •̀ ᴗ - ˵ ) ✧";
-            updateImage('kutya.gif'); 
-        }, 6000);
-
-        setTimeout(() => {
-            document.getElementById('question').innerText = "It is on your way...";
-            updateImage('presents-gifts.gif'); 
-        }, 10000);
-
-        setTimeout(() => {
-            document.getElementById('question').innerText = "Wait patiently hehe 🎁";
-            updateImage('cute-cat.gif'); 
-        }, 13000);
-
-        setTimeout(() => {
-            document.getElementById('question').innerText = "u r the best baby. Mwaahhh !!! ❤️✨";
-            updateImage('cat-cat-meme.gif'); 
-        }, 16000);
-
-        // --- FINAL TIMING FIX ---
+        // --- THE FINAL PART FIX ---
         setTimeout(() => {
             document.getElementById('question').innerText = "Okay Bui-bui Bund Paari, that ass deserves a raise 😁🧚‍♀️";
             updateImage('apple-apple-cat.gif'); 
             
-            // Wait 3 seconds so she can read the joke and see the cat
+            // Wait 3 seconds for her to read it...
             setTimeout(() => {
-                // 1. Hide the text and the apple cat image so the screen is clean
+                // 1. CLEAN THE STAGE: Hide the text and the apple cat image
                 document.getElementById('question').style.display = 'none';
                 document.getElementById('image-container').style.display = 'none';
                 
                 // 2. Hide the blurry box
                 hideBox(); 
 
-                // 3. Start the permanent party on a clean screen
+                // 3. START PARTY FOREVER ON A CLEAN SCREEN
                 triggerPartyEffects();
             }, 3000); 
         }, 20000);
     }, 15000);
 }
+
+// ... [Keep the rest of your helper functions the same] ...
 
 function createFloatingGif() {
     const img = new Image();
