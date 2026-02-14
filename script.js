@@ -45,7 +45,6 @@ function startParty() {
     const colors = ['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#0000ff', '#4b0082', '#9400d3'];
     let colorIndex = 0;
 
-    // Create immediate burst of icons
     for (let i = 0; i < 20; i++) {
         createFloatingGif();
     }
@@ -68,46 +67,51 @@ function startParty() {
         const icons = document.querySelectorAll('.party-icon');
         icons.forEach(icon => icon.remove());
 
-        // 1. "I love you" portion (Stays for 4 seconds)
-        document.getElementById('question').style.display = 'block';
-        document.getElementById('question').innerText = "I love you Janhvi! ❤️";
         const imageContainer = document.getElementById('image-container');
         imageContainer.style.display = 'block'; 
+        document.getElementById('question').style.display = 'block';
+
+        // --- THE TIMELINE (Cumulative Math) ---
+
+        // 0 Seconds: I Love You
+        document.getElementById('question').innerText = "I love you Janhvi! ❤️";
         updateImage('love-cute.gif'); 
 
-        // 2. After 4 seconds, show "Wait!"
+        // 4 Seconds: Wait!
         setTimeout(() => {
             document.getElementById('question').innerText = "Wait!";
             updateImage('doggy-cute.gif'); 
-        }, 1500);
-        
+        }, 4000); 
+
+        // 5.5 Seconds: I got something... (Wait! lasted 1.5s)
         setTimeout(() => {
             document.getElementById('question').innerText = "I got something for you (˵ •̀ ᴗ - ˵ ) ✧";
             updateImage('kutya.gif'); 
-        }, 4000);
+        }, 5500);
 
-        // 3. After another 1.5 seconds (5.5s total), "it is on your way"
+        // 8 Seconds: It is on your way... (I got something lasted 2.5s)
         setTimeout(() => {
             document.getElementById('question').innerText = "It is on your way...";
             updateImage('presents-gifts.gif'); 
-        }, 2500);
+        }, 8000);
 
+        // 10.5 Seconds: Wait patiently (On your way lasted 2.5s)
         setTimeout(() => {
-            document.getElementById('question').innerText = "Wait patiently hehe🎁";
+            document.getElementById('question').innerText = "Wait patiently hehe 🎁";
             updateImage('cute-cat.gif'); 
-        }, 5000);
+        }, 10500);
 
-        // 4. After another 2.5 seconds (8s total), Final Message
+        // 13 Seconds: You are the best (Wait patiently lasted 2.5s)
         setTimeout(() => {
             document.getElementById('question').innerText = "u r the best baby. Mwaahhh !!! ❤️✨";
             updateImage('cat-cat-meme.gif'); 
-        }, 4000);
+        }, 13000);
 
+        // 17 Seconds: Final Message (The best baby lasted 4s)
         setTimeout(() => {
             document.getElementById('question').innerText = "Okay Bui-bui Bund Paari, that ass deserves a raise 😁🧚‍♀️";
             updateImage('apple-apple-cat.gif'); 
-        }, 8000);
-
+        }, 17000);
 
     }, 15000);
 }
