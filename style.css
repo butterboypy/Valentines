@@ -1,18 +1,20 @@
 /* style.css */
 
+/* 1. Reset and Body Setup */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
     margin: 0;
     padding: 0;
     background-color: #FADADD; /* Light pink */
-    /* CRITICAL FIX: Stops the page from expanding or scrolling when GIFs pop at the edges */
+    /* Stops scrollbars if a GIF pops at the very edge */
     overflow: hidden; 
     width: 100vw;
     height: 100vh;
     transition: background-color 0.2s ease; 
 }
 
+/* 2. Main Content Container */
 #container {
     display: flex;
     flex-direction: column;
@@ -21,28 +23,36 @@ body {
     height: 100vh;
     width: 100%;
     position: relative;
-    /* High z-index ensures buttons and text stay clickable/visible over the party */
+    /* Keeps buttons and main text above the flying party gifs */
     z-index: 100; 
 }
 
+/* 3. Main Image Styling */
+#image-container {
+    margin-bottom: 20px;
+}
+
 #image-container img {
-    max-width: 80vw; /* Responsive width for mobile */
-    max-height: 40vh; /* Prevents the GIF from pushing text off screen */
+    max-width: 80vw; /* Won't exceed 80% of screen width */
+    max-height: 35vh; /* Leaves room for the long final messages */
     width: auto;
     height: auto;
     border-radius: 20px;
-    margin-bottom: 20px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
+/* 4. Text Styling */
 #question {
     font-family: 'Sacramento', cursive;
-    font-size: 52px;
+    font-size: 42px; /* Adjusted so "Wait! I got something for you" fits nicely */
     padding: 0 20px;
     color: #FB607F;
     margin: 10px 0;
+    min-height: 80px; /* Prevents the GIF from jumping when text changes */
+    line-height: 1.2;
 }
 
+/* 5. Button Styling */
 #options {
     margin-top: 20px;
 }
@@ -64,19 +74,18 @@ button:hover {
     transform: scale(1.1);
 }
 
-/* --- THE PARTY ANIMATIONS --- */
-
+/* 6. The Party Animations */
 .party-icon {
-    position: absolute; /* Changed to absolute to stay within the body boundaries */
-    z-index: 50; /* Sits behind the main container but above the background */
-    pointer-events: none; 
+    position: absolute; 
+    z-index: 50; /* Sits behind the main text/image but above background */
+    pointer-events: none; /* Allows user to click "through" them if needed */
     animation: celebrate 0.5s ease-out forwards;
-    /* Prevent images from being bigger than the screen if randomized poorly */
-    max-width: 200px;
-    max-height: 200px;
+    max-width: 150px;
+    max-height: 150px;
     object-fit: contain;
 }
 
+/* Animation for the popping effect */
 @keyframes celebrate {
     0% { 
         transform: scale(0) rotate(-20deg); 

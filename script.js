@@ -1,9 +1,5 @@
-//////////////////////////////  NEW CODE BELOW ///////////////////////////////
-
-// script.js
-
 // 1. Define your series of GIFs here
-const noGifs = ['glorp-spin.gif','maxwell-spin.gif', 'cat.gif', 'oia-uia.gif', 'hit-bubu.webp','hasbulla-hasbik.gif','gorilla-beating-chest.gif']; 
+const noGifs = ['glorp-spin.gif','maxwell-spin.gif', 'oia-uia.gif', 'hit-bubu.webp','hasbulla-hasbik.gif','gorilla-beating-chest.gif']; 
 const yesGifs = ['maxwell-spin.gif', 'cat-heart.gif', 'oia-uia.gif']; 
 const partyGifs = ['maxwell-spin.gif', 'cat-heart.gif', 'oia-uia.gif', 'alien-cat-gleepy.gif','mochi-peachcat-cute-cat.gif','cute-happy.gif','happy-dance-happy (1).gif','pengu-pudgy.gif']; 
 const noTexts = ['No', 'You sure?', 'Pleease?', 'Think again!', 'Last chance!'];
@@ -12,19 +8,19 @@ let noCount = 0;
 
 function selectOption(option) {
     if (option === 'yes') {
-        // 1. Show the first GIF immediately
+        // 1. Show the first transition GIF immediately
         updateImage('zavarius-zavarius-teddy.gif');
         
         // 2. Update text and hide buttons
         document.getElementById('question').innerText = "Yayyyyyyyyyyyyy!!!!!! Let's go Babyyyy!!!! ❤️";
         document.getElementById('options').style.display = 'none';
 
-        // 3. Swap to the second GIF after 1.5 seconds
+        // 3. Swap to the second transition GIF after 1.5 seconds
         setTimeout(function() {
             updateImage('cheering-baby-yeah.gif');
         }, 1500);
 
-        // 4. Start the full party explosion after 3 seconds total
+        // 4. Start the full party explosion after 4 seconds total
         setTimeout(function() {
             document.getElementById('question').style.display = 'none';
             document.getElementById('image-container').style.display = 'none';
@@ -49,6 +45,7 @@ function startParty() {
     const colors = ['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#0000ff', '#4b0082', '#9400d3'];
     let colorIndex = 0;
 
+    // Create immediate burst of icons
     for (let i = 0; i < 20; i++) {
         createFloatingGif();
     }
@@ -62,6 +59,7 @@ function startParty() {
         createFloatingGif();
     }, 150); 
 
+    // THE FINAL SEQUENCE (Starts after 15 seconds of party)
     setTimeout(() => {
         clearInterval(colorInterval);
         clearInterval(partyInterval);
@@ -70,14 +68,47 @@ function startParty() {
         const icons = document.querySelectorAll('.party-icon');
         icons.forEach(icon => icon.remove());
 
-        // --- NEW LOGIC FOR FINAL GIF ---
+        // 1. "I love you" portion (Stays for 4 seconds)
         document.getElementById('question').style.display = 'block';
         document.getElementById('question').innerText = "I love you Janhvi! ❤️";
-        
-        // Make the image container visible again and set the final GIF
         const imageContainer = document.getElementById('image-container');
         imageContainer.style.display = 'block'; 
-        updateImage('love-cute.gif'); // Replace with your actual filename
+        updateImage('love-cute.gif'); 
+
+        // 2. After 4 seconds, show "Wait!"
+        setTimeout(() => {
+            document.getElementById('question').innerText = "Wait!";
+            updateImage('doggy-cute.gif'); 
+        }, 1500);
+
+        setTimeout(() => {
+            document.getElementById('question').innerText = "I got something for you (˵ •̀ ᴗ - ˵ ) ✧";
+            updateImage('kutya.gif'); 
+        }, 1500);
+
+        // 3. After another 1.5 seconds (5.5s total), "it is on your way"
+        setTimeout(() => {
+            document.getElementById('question').innerText = "It is on your way...";
+            updateImage('presents-gifts.gif'); 
+        }, 2500);
+
+        setTimeout(() => {
+            document.getElementById('question').innerText = "Wait patiently hehe🎁";
+            updateImage('cute-cat.gif'); 
+        }, 2500);
+
+        // 4. After another 2.5 seconds (8s total), Final Message
+        setTimeout(() => {
+            document.getElementById('question').innerText = "u r the best baby. Mwaahhh !!! ❤️✨";
+            updateImage('cat-cat-meme.gif'); 
+        }, 4000);
+
+        setTimeout(() => {
+            document.getElementById('question').innerText = "Okay Bui-bui Bund Paari, that ass deserves a raise 😁🧚‍♀️";
+            updateImage('apple-apple-cat.gif'); 
+        }, 2000);
+
+
     }, 15000);
 }
 
@@ -86,14 +117,12 @@ function createFloatingGif() {
     img.src = partyGifs[Math.floor(Math.random() * partyGifs.length)];
     img.className = 'party-icon';
     
-    // Set size first so we can use it for positioning math
-    const size = Math.random() * 100 + 100; // Between 100px and 200px
+    const size = Math.random() * 100 + 100; 
     img.style.width = size + "px";
 
-    // Position math: (Viewport Width - Image Size) ensures it stays on screen
-    // We use a 80% range to keep them more centered and away from the very edges
-    const randomLeft = Math.floor(Math.random() * 80) + 5; // 5% to 85%
-    const randomTop = Math.floor(Math.random() * 80) + 5;  // 5% to 85%
+    // Stay within safe screen boundaries (5% to 85%)
+    const randomLeft = Math.floor(Math.random() * 80) + 5; 
+    const randomTop = Math.floor(Math.random() * 80) + 5;  
     
     img.style.left = randomLeft + "vw"; 
     img.style.top = randomTop + "vh";
@@ -112,11 +141,11 @@ function updateImage(imageSrc) {
     imageContainer.innerHTML = ''; 
     const img = new Image();
     img.src = imageSrc;
-    img.alt = 'Cat GIF';
+    img.alt = 'Valentine GIF';
     img.onload = function() {
         imageContainer.appendChild(img);
     };
 }
 
-// Initial image load - This keeps your "Will you be my valentine" GIF as Maxwell
+// Initial image load
 updateImage('maxwell-spin.gif');
