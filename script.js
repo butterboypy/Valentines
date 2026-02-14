@@ -80,11 +80,11 @@ function startParty() {
             document.getElementById('question').innerText = "Wait!";
             updateImage('doggy-cute.gif'); 
         }, 1500);
-
+        
         setTimeout(() => {
             document.getElementById('question').innerText = "I got something for you (˵ •̀ ᴗ - ˵ ) ✧";
             updateImage('kutya.gif'); 
-        }, 1500);
+        }, 4000);
 
         // 3. After another 1.5 seconds (5.5s total), "it is on your way"
         setTimeout(() => {
@@ -95,7 +95,7 @@ function startParty() {
         setTimeout(() => {
             document.getElementById('question').innerText = "Wait patiently hehe🎁";
             updateImage('cute-cat.gif'); 
-        }, 2500);
+        }, 5000);
 
         // 4. After another 2.5 seconds (8s total), Final Message
         setTimeout(() => {
@@ -106,7 +106,7 @@ function startParty() {
         setTimeout(() => {
             document.getElementById('question').innerText = "Okay Bui-bui Bund Paari, that ass deserves a raise 😁🧚‍♀️";
             updateImage('apple-apple-cat.gif'); 
-        }, 2000);
+        }, 8000);
 
 
     }, 15000);
