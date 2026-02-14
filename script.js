@@ -189,7 +189,7 @@ function startPartySequence() {
         setTimeout(() => { document.getElementById('question').innerText = "I got something for you (˵ •̀ ᴗ - ˵ ) ✧"; updateImage('kutya.gif'); }, 6500);
         setTimeout(() => { document.getElementById('question').innerText = "It is on your way..."; updateImage('presents-gifts.gif'); }, 12000);
         setTimeout(() => { document.getElementById('question').innerText = "Wait patiently hehe 🎁"; updateImage('cute-cat.gif'); }, 15000);
-        setTimeout(() => { document.getElementById('question').innerText = "u r the best baby. Mwaahhh !!! ❤️✨"; updateImage('cat-cat-meme.gif'); }, 18000);
+        setTimeout(() => { document.getElementById('question').innerText = "u r the best baby. Mwaahhh !!! ❤️✨"; updateImage('cat-cat-meme.gif'); }, 19000);
 
         // --- THE FINAL PART FIX ---
         setTimeout(() => {
