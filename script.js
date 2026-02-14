@@ -94,18 +94,22 @@ let noCount = 0;
 
 function selectOption(option) {
     if (option === 'yes') {
-        // --- THIS PART IS UPDATED ---
-        // 1. Change the image to a specific "Happy" GIF for the "Yay" text part
-        updateImage('zavarius-zavarius-teddy.gif','cheering-baby-yeah.gif'); // You can change 'cat-heart.gif' to any GIF you want here
+        // 1. Show the first GIF immediately
+        updateImage('zavarius-zavarius-teddy.gif');
         
-        // 2. Show the "Yay" text
+        // 2. Update text and hide buttons
         document.getElementById('question').innerText = "Yayyyyyyyyyyyyy!!!!!! Let's go Babyyyy!!!! ❤️";
-        document.getElementById('options').style.display = 'none'; // Hide buttons immediately
-        
-        // 3. Wait 1 second, then start the party explosion
+        document.getElementById('options').style.display = 'none';
+
+        // 3. Swap to the second GIF after 1.5 seconds
         setTimeout(function() {
-            document.getElementById('question').style.display = 'none'; // Hide text
-            document.getElementById('image-container').style.display = 'none'; // Hide main image
+            updateImage('cheering-baby-yeah.gif');
+        }, 1500);
+
+        // 4. Start the full party explosion after 3 seconds total
+        setTimeout(function() {
+            document.getElementById('question').style.display = 'none';
+            document.getElementById('image-container').style.display = 'none';
             startParty();
         }, 3000);
 
@@ -148,8 +152,14 @@ function startParty() {
         const icons = document.querySelectorAll('.party-icon');
         icons.forEach(icon => icon.remove());
 
+        // --- NEW LOGIC FOR FINAL GIF ---
         document.getElementById('question').style.display = 'block';
         document.getElementById('question').innerText = "I love you Janhvi! ❤️";
+        
+        // Make the image container visible again and set the final GIF
+        const imageContainer = document.getElementById('image-container');
+        imageContainer.style.display = 'block'; 
+        updateImage('love-cute.gif'); // Replace with your actual filename
     }, 10000);
 }
 
