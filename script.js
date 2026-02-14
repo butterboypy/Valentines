@@ -96,7 +96,7 @@ function selectOption(option) {
     if (option === 'yes') {
         // --- THIS PART IS UPDATED ---
         // 1. Change the image to a specific "Happy" GIF for the "Yay" text part
-        updateImage('cat-heart.gif'); // You can change 'cat-heart.gif' to any GIF you want here
+        updateImage('zavarius-zavarius-teddy.gif','cheering-baby-yeah.gif'); // You can change 'cat-heart.gif' to any GIF you want here
         
         // 2. Show the "Yay" text
         document.getElementById('question').innerText = "Yayyyyyyyyyyyyy!!!!!! Let's go Babyyyy!!!! ❤️";
@@ -107,7 +107,7 @@ function selectOption(option) {
             document.getElementById('question').style.display = 'none'; // Hide text
             document.getElementById('image-container').style.display = 'none'; // Hide main image
             startParty();
-        }, 1000);
+        }, 3000);
 
     } else if (option === 'no') {
         noCount++;
