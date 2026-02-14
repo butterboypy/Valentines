@@ -82,47 +82,86 @@
 
 ///////////////////////////////  NEW CODE BELOW ///////////////////////////////
 
-// script.js
-
-// 1. Define your series of GIFs here
-const noGifs = ['maxwell-spin.gif', 'cat.gif', 'oia-uia.gif', 'oia-uia.gif']; // Add your "No" GIFs here
-const yesGifs = ['maxwell-spin.gif', 'cat.gif', 'oia-uia.gif'];  // Add your "Yes" GIFs here
+const noGifs = ['maxwell-spin.gif', 'cat.gif', 'oia-uia.gif', 'oia-uia.gif'];
+const yesGifs = ['maxwell-spin.gif', 'cat.gif', 'oia-uia.gif']; 
+const partyGifs = ['maxwell-spin.gif', 'cat-heart.gif', 'oia-uia.gif']; // The GIFs that will fill the screen
 const noTexts = ['No', 'You sure?', 'Pleease?', 'Think again!', 'Last chance!'];
 
 let noCount = 0;
 
 function selectOption(option) {
     if (option === 'yes') {
-        flashRainbowColors(function() {
-            document.getElementById('question').innerText = "Yay! See you soon Janhvi ji! ❤️";
-            displaySeries(yesGifs); // Play the "Yes" series
-        });
+        // 1. Show the "Yay" text first
+        document.getElementById('question').innerText = "Yayyyyyyyyyyyyy!!!!!! Let's go Babyyyy!!!! ❤️";
+        document.getElementById('options').style.display = 'none'; // Hide buttons immediately
+        
+        // 2. Wait 1 second, then start the party
+        setTimeout(function() {
+            document.getElementById('question').style.display = 'none'; // Hide text
+            document.getElementById('image-container').style.display = 'none'; // Hide main image
+            startParty();
+        }, 1000);
+
     } else if (option === 'no') {
         noCount++;
-        
-        // Update "No" button text based on count
         const noButton = document.getElementById('no-button');
-        if (noCount < noTexts.length) {
-            noButton.innerText = noTexts[noCount];
-        } else {
-            noButton.innerText = 'Please?';
-        }
+        noButton.innerText = noTexts[noCount % noTexts.length];
 
-        // Increase "Yes" button size (your existing logic)
         const yesButton = document.getElementById('yes-button');
         const currentFontSize = window.getComputedStyle(yesButton).getPropertyValue('font-size');
-        const newSize = parseFloat(currentFontSize) * 1.5; // Adjusted to 1.5x so it doesn't get TOO huge too fast
+        const newSize = parseFloat(currentFontSize) * 1.5;
         yesButton.style.fontSize = newSize + 'px';
 
-        // Cycle through the "No" GIFs
         updateImage(noGifs[noCount % noGifs.length]);
     }
 }
 
-// Function to update just the image
+function startParty() {
+    const colors = ['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#0000ff', '#4b0082', '#9400d3'];
+    let colorIndex = 0;
+
+    // Start background color cycle
+    const colorInterval = setInterval(() => {
+        document.body.style.backgroundColor = colors[colorIndex];
+        colorIndex = (colorIndex + 1) % colors.length;
+    }, 200);
+
+    // Create a shower of GIFs
+    const partyInterval = setInterval(() => {
+        createFloatingGif();
+    }, 300); // New GIF appears every 300ms
+
+    // Stop everything after 10 seconds
+    setTimeout(() => {
+        clearInterval(colorInterval);
+        clearInterval(partyInterval);
+        document.body.style.backgroundColor = '#FADADD'; // Reset to original pink
+        // Optional: show a final message or reset
+    }, 10000);
+}
+
+function createFloatingGif() {
+    const img = new Image();
+    img.src = partyGifs[Math.floor(Math.random() * partyGifs.length)];
+    img.className = 'party-icon';
+    
+    // Random Position
+    img.style.left = Math.random() * 100 + "vw";
+    img.style.top = Math.random() * 100 + "vh";
+    
+    // Random Size
+    const size = Math.random() * 150 + 50; // Between 50px and 200px
+    img.style.width = size + "px";
+
+    document.body.appendChild(img);
+
+    // Remove the individual GIF after 2 seconds to keep the screen from lagging
+    setTimeout(() => { img.remove(); }, 2000);
+}
+
 function updateImage(imageSrc) {
     const imageContainer = document.getElementById('image-container');
-    imageContainer.innerHTML = ''; // Clear old image
+    imageContainer.innerHTML = '';
     const img = new Image();
     img.src = imageSrc;
     img.alt = 'Cat GIF';
@@ -131,32 +170,4 @@ function updateImage(imageSrc) {
     };
 }
 
-// Function to play a series of GIFs for "Yes"
-function displaySeries(gifArray) {
-    document.getElementById('options').style.display = 'none'; // Hide buttons
-    let i = 0;
-    updateImage(gifArray[i]);
-    
-    // Change the "Yes" GIF every 3 seconds
-    setInterval(function() {
-        i = (i + 1) % gifArray.length;
-        updateImage(gifArray[i]);
-    }, 3000);
-}
-
-function flashRainbowColors(callback) {
-    var colors = ['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#0000ff', '#4b0082', '#9400d3'];
-    var i = 0;
-    var interval = setInterval(function() {
-        document.body.style.backgroundColor = colors[i];
-        i = (i + 1) % colors.length;
-    }, 200);
-    setTimeout(function() {
-        clearInterval(interval);
-        document.body.style.backgroundColor = '';
-        if (callback) callback();
-    }, 2000);
-}
-
-// Initial image
 updateImage('cat.gif');
